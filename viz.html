@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3.layout.cloud.js"></script>
+
+    <div style="padding: 5px;" id="word-cloud-2005"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2006"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2007"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2008"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2009"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2010"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2011"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2012"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2013"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2014"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2015"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2016"></div>
+    <hr>
+    <div style="padding: 5px;" id="word-cloud-2017"></div>
+
+    <script>
+
+function spiralfuncc(size) {
+  var dy = size[1] / 100,
+      dx = 4;
+  return function(t) {
+    return [dx*Math.floor(t/50),dy*Math.floor(t%50)];
+  };
+}
+
+var glob_data;
+
+$.getJSON('http://localhost:3000/alljson.json', function(data) {
+//    e = '2007';
+//    drawWordCloud(100,data[e],'#word-cloud-'+e);
+  Object.keys(data).forEach(function(e) {
+    drawWordCloud(100,data[e],'#word-cloud-'+e);
+  });
+  glob_data = data;
+});
+
+        var easeOutQuad = function (t) { return 1-(--t)*t*t*t }
+        var easeInQuad = function (t) { return t }
+        var easeOutInQuad = function (t) { return t<.30 ? easeOutQuad(2 * t) * 0.5 : easeInQuad((2 * (t - 0.5))) * 0.5 + 0.5 }
+
+        function drawWordCloud(cloud_size,data,element)
+        {
+
+        var rescale = 250;
+        var allwords = data['word_values'];
+        var awards = data['award'];
+        var award_vals = Object.values(awards);
+        var ar = award_vals.sort(function(a,b){return b-a})
+        var top_award_vals = ar[0];
+
+        var allw = Object.keys(allwords);
+        allw.sort(function(a,b) { return allwords[b] - allwords[a]});
+
+            width = 2000;
+            height = 500;
+            fontFamily = "Open Sans";
+            var fill = d3.scale.category20();
+            d3.layout.cloud().size([width, height])
+                .words(allw.slice(0,cloud_size).map(function(d)
+                {
+                  console.log(d);
+                  console.log('a: '+(7 + allwords[d] * rescale));
+                  console.log('b: '+(7 + awards[d]/top_award_vals * rescale));
+                    return {
+                        text: d,
+//                        size: 7 + words[d] * 100
+//                        size: 7 + awards[d]/top_award_vals * 10
+                        size: 7 + awards[d]/top_award_vals * 1000,
+                        opaqueness: easeOutInQuad(allwords[d])
+                    };
+                }))
+                .padding(7)
+                .spiral(spiralfuncc)
+                .rotate(function()
+                {
+                    // Uncomment and change this line if you want the words to
+                    // be rotated. Returning 0 makes all the words horizontal.
+                    // return ~~(Math.random() * 2) * 90;
+                    return 0;
+                })
+                .font(fontFamily)
+                .fontSize(function(d)
+                {
+                    return Math.pow(d.size,0.20)*8.5;
+//                    return Math.pow(d.size,0.3)*8;
+//                  return d.size*0.9;
+                })
+                .on("end", draw)
+                .timeInterval(10)
+                .start();
+
+            function get_description(d) {
+              return;
+            }
+
+            function draw(words)
+            {
+                d3.select(element).append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .append("g")
+                    .attr("transform", "translate(" + width / 2 + ", " + height / 2 + ")")
+                    .selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                    .style("font-size", function(d)
+                    {
+                        return d.size + "px";
+                    })
+                    .style("font-family", fontFamily)
+                    .style("fill", function(d, i)
+                    {
+                        return 'rgba(0,0,0,'+d.opaqueness+')';
+                    })
+                    .attr("text-anchor", "middle")
+//                    .attr("data-description", get_description(d))
+                    .attr("transform", function(d)
+                    {
+                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    .text(function(d)
+                    {
+                        return d.text;
+                    });
+            }
+        }
+
+//        drawWordCloud(250);
+    </script>
+</body>
+
+</html>

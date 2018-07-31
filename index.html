@@ -150,6 +150,13 @@
     }
 
 
+text:hover {
+  text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
 .sk-fading-circle {
   margin: 100px auto;
   width: 40px;
@@ -299,7 +306,6 @@
 
 	</style>
 
-
 </head>
 
 <body>
@@ -334,7 +340,7 @@
 		</p>
 
 		<p class="introp">
-    Distinctive phrases are displayed in stronger colours. The larger a word is the more money was available for associated grants.
+    The most distinctive phrases are displayed in stronger colours. The larger a word is the more money was available for associated grants.
 		</p>
 
 		<p class="introp">
@@ -367,7 +373,7 @@
 		<!--   actual graphic/chart   -->
 		<div class='chart' style="height: 80%; border-left: 3px solid; color: #dddddd;">
       <div style="padding: 5px;" class="wordcloud wordcloud-visible" id="word-cloud-2005">
-        <p>2005 was the 60th anniversary of the Second World War. Many of the most distinctive themes relate to activities of commemmoration and reunion.</p>
+        <p>2005 was the 60th anniversary of the Second World War's ending, with activities focused on commemmoration and reunion.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2006">
         <p>Pigeon racing and folk music were surprisingly popular in 2006.</p>
@@ -379,31 +385,31 @@
         <p>Natural themes featured frequently in 2008, and many were getting ready for the anniversary of Darwin's 200th birthday.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2009">
-        <p>Mention science funding.</p>
+        <p>Scientific themes stand out in 2009. Wellcome Trust, a prominent science funder, is distinguished by colour.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2010">
-        <p>Heroes Return</p>
+        <p>With another anniversary of WW2, locations related to the war stand out.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2011">
-        <p>Preparation for olympics.</p>
+        <p>Preparations for the London olympics begin already in 2011.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2012">
-        <p>Diamond jubilee.</p>
+        <p>2012 was the year of the Diamond Jubilee and when the Department for Transport published a lot of data.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2013">
-        <p>Resilience</p>
+        <p>In 2013, the Big Lottery Fund ran its Recession Response Fund.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2014">
-        <p>Ebola</p>
+        <p>An ebola crisis in West Africa, together with other natural science topics, characterised 2014.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2015">
-        <p>Mindfulness and happiness</p>
+        <p>Psychological themes such as mindfulness and happiness were most distinctive in 2015.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2016">
-        <p>Refugee crisis</p>
+        <p>The refugee crisis in 2016 stands out through the keyword "syrian".</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2017">
-        <p></p>
+        <p>Loneliness and community assets were big themes in 2017.</p>
       </div>
 		</div>
 	</div>
@@ -528,268 +534,298 @@
 </style>
 
 <script>
-
 function get_list_html(grants) {
-  var output = '';
-  grants.forEach(function(e) {
-    var template = $('#templateinner').html();
-    Mustache.parse(template);
-    var view = {
-      'identifier': e['Identifier'],
-      'awarded': e['Amount Awarded'],
-      'funder': e['Funding Org:Name'],
-      'recipient': e['Recipient Org:Name'],
-      'title': e['Title']
-    }
-    output += Mustache.render(template, view);
-  });
-  return output;
+    var output = '';
+    grants.forEach(function(e) {
+        var template = $('#templateinner').html();
+        Mustache.parse(template);
+        var view = {
+            'identifier': e['Identifier'],
+            'awarded': e['Amount Awarded'],
+            'funder': e['Funding Org:Name'],
+            'recipient': e['Recipient Org:Name'],
+            'title': e['Title']
+        }
+        output += Mustache.render(template, view);
+    });
+    return output;
 }
 
 function display_modal(object) {
-  var data = JSON.parse($(object).attr('data-description'));
-  var template = $('#template').html();
-  Mustache.parse(template);
-  var view = {
-    'year': data['year'],
-    'value': Math.round(data['value']),
-    'word': data['word'],
-    'quantity': data['size'],
-    'list': get_list_html(data['sample_grants'])
-  }
-  var html = Mustache.render(template, view);
-  var inst = $('[data-remodal-id=modal]').remodal();
-  html += '</ul><button data-remodal-action="confirm" class="remodal-confirm">OK</button>';
-  inst.$modal.html(html);
-  inst.open();
+    var data = JSON.parse($(object).attr('data-description'));
+    var template = $('#template').html();
+    Mustache.parse(template);
+    var view = {
+        'year': data['year'],
+        'value': Math.round(data['value']),
+        'word': data['word'],
+        'quantity': data['size'],
+        'list': get_list_html(data['sample_grants'])
+    }
+    var html = Mustache.render(template, view);
+    var inst = $('[data-remodal-id=modal]').remodal();
+    html += '</ul><button data-remodal-action="confirm" class="remodal-confirm">OK</button>';
+    inst.$modal.html(html);
+    inst.open();
 }
 
 function spiralfuncc(size) {
-  var dy = size[1] / 100,
-      dx = 8;
-  return function(t) {
-    return [dx*Math.floor(t/50),dy*Math.floor(t%50)];
-  };
+    var dy = size[1] / 100,
+        dx = 8;
+    return function(t) {
+        return [dx * Math.floor(t / 50), dy * Math.floor(t % 50)];
+    };
 }
 
 var glob_data;
-var stopwords = ['spouse','60th','65th','pole','cent','remember','remembering','buffet','tape','out-of-school','borrow','bind','awarding','differentiate','19th','one-year','ticket','accelerate','delienate','fourteen','transferrable','differentiate','80th','piles','rack','delineate','skip','procurement','enforcement','wasting','ping','malta','normandy','interdisciplinary','holland','allocation','cord','handover','rethink','govern','follow-on','convening','sheriff','furthest','thank','confirmation','lots','90th','cymru','mitigate','overarch','yachting','interrogate','globally','extracurricular','obstinately','resilience','desperately','earliest','unrestricted','resilient'];
+// remove numbers and words that are very general
+var stopwords = ['spouse', '60th', '65th', 'pole', 'cent', 'remember', 'remembering', 'buffet', 'tape', 'out-of-school', 'borrow', 'bind', 'awarding', 'differentiate', '19th', 'one-year', 'ticket', 'accelerate', 'delienate', 'fourteen', 'transferrable', 'differentiate', '80th', 'piles', 'rack', 'delineate', 'skip', 'procurement', 'enforcement', 'wasting', 'ping', 'malta', 'normandy', 'interdisciplinary', 'holland', 'allocation', 'cord', 'handover', 'rethink', 'govern', 'follow-on', 'convening', 'sheriff', 'furthest', 'thank', 'confirmation', 'lots', '90th', 'cymru', 'mitigate', 'overarch', 'yachting', 'interrogate', 'globally', 'extracurricular', 'obstinately', 'resilience', 'desperately', 'earliest', 'unrestricted', 'resilient','hopefully','unprecedented','crumb','closing','pile','hoot','merit','intercalate','40th'];
 
-//$.getJSON('alljson.json', function(data) {
-$.getJSON('http://localhost:3000/alljson.json', function(data) {
-//    e = '2017';
-//    drawWordCloud(50,data[e],e);
-  glob_data = data;
-  Object.keys(data).forEach(function(e) {
-    console.log(e);
-    drawWordCloud(100,data[e],e);
-  });
+//$.getJSON('http://localhost:3000/allj2.json', function(data) {
+$.getJSON('data.json', function(data) {
+    glob_data = data;
+    Object.keys(data).forEach(function(e) {
+        console.log(e);
+        drawWordCloud(100, data[e], e);
+    });
 });
 
-        function get_opaqueness(weight,sortedlist,weights) {
-          var max = weights[sortedlist[0]];
-          var min = weights[sortedlist[35]];
-          return ((weight-min)/(max-min))*0.98+0.02;
-        }
+function get_opaqueness(weight, sortedlist, weights) {
+    var max = weights[sortedlist[0]];
+    var min = weights[sortedlist[35]];
+    return ((weight - min) / (max - min)) * 0.98 + 0.02;
+}
 
-        var easeOutQuad = function (t) { return 1-(--t)*t*t*t }
-        var easeInQuad = function (t) { return t }
-        var easeOutInQuad = function (t) { return t<.30 ? easeOutQuad(2 * t) * 0.5 : easeInQuad((2 * (t - 0.5))) * 0.5 + 0.5 }
+var easeOutQuad = function(t) {
+    return 1 - (--t) * t * t * t
+}
+var easeInQuad = function(t) {
+    return t
+}
+var easeOutInQuad = function(t) {
+    return t < .30 ? easeOutQuad(2 * t) * 0.5 : easeInQuad((2 * (t - 0.5))) * 0.5 + 0.5
+}
 
-        function drawWordCloud(cloud_size,data,year)
-        {
+function drawWordCloud(cloud_size, data, year) {
+    var element = '#word-cloud-' + year;
+    var rescale = 250;
+    var allwords = data['word_values'];
+    var awards = data['award'];
+    var award_vals = Object.values(awards);
+    var ar = award_vals.sort(function(a, b) {
+        return b - a
+    })
+    var top_award_vals = ar[0];
 
-        var element = '#word-cloud-'+year;
-        var rescale = 250;
-        var allwords = data['word_values'];
-        var awards = data['award'];
-        var award_vals = Object.values(awards);
-        var ar = award_vals.sort(function(a,b){return b-a})
-        var top_award_vals = ar[0];
+    var allw = Object.keys(allwords);
+    allw = allw.filter(function(el) {
+        return stopwords.indexOf(el) < 0;
+    });
 
-        var allw = Object.keys(allwords);
-        allw = allw.filter( function( el ) {
-          return stopwords.indexOf( el ) < 0;
-        } );
+    allw.sort(function(a, b) {
+        return allwords[b] - allwords[a]
+    });
 
-        allw.sort(function(a,b) { return allwords[b] - allwords[a]});
+    width = 1000;
+    height = 600;
+    fontFamily = "Open Sans";
+    var fill = d3.scale.category20();
+    d3.layout.cloud().size([width, height])
+        .words(allw.slice(0, cloud_size).map(function(d) {
+            return {
+                text: d,
+                size: 7 + awards[d] / top_award_vals * 1000,
+                opaqueness: easeOutInQuad(get_opaqueness(allwords[d], allw, allwords))
+            };
+        }))
+        .padding(8)
+        .spiral(spiralfuncc)
+        .rotate(function() {
+            return 0;
+        })
+        .font(fontFamily)
+        .fontSize(function(d) {
+            return Math.pow(d.size, 0.20) * 13;
+        })
+        .on("end", function(d) {
+            draw(d, year)
+        })
+        .timeInterval(100)
+        .start();
 
-            width = 1000;
-            height = 600;
-            fontFamily = "Open Sans";
-            var fill = d3.scale.category20();
-            d3.layout.cloud().size([width, height])
-                .words(allw.slice(0,cloud_size).map(function(d)
-                {
-//                  console.log(d);
-//                  console.log('a: '+(7 + allwords[d] * rescale));
-//                  console.log('b: '+(7 + awards[d]/top_award_vals * rescale));
-                    return {
-                        text: d,
-//                        size: 7 + words[d] * 100
-//                        size: 7 + awards[d]/top_award_vals * 10
-                        size: 7 + awards[d]/top_award_vals * 1000,
-                        opaqueness: easeOutInQuad(get_opaqueness(allwords[d],allw,allwords))
-//                        opaqueness: get_opaqueness(allwords[d],allw,allwords)
-                    };
-                }))
-                .padding(8)
-                .spiral(spiralfuncc)
-                .rotate(function()
-                {
-                    // Uncomment and change this line if you want the words to
-                    // be rotated. Returning 0 makes all the words horizontal.
-                    // return ~~(Math.random() * 2) * 90;
-                    return 0;
-                })
-                .font(fontFamily)
-                  .fontSize(function(d) {
-//                  if(year === '2014') {
-//                    return Math.pow(d.size,0.20)*6.5;
-//                  } else{
-                    return Math.pow(d.size,0.20)*13;
-//                }
-//                    return Math.pow(d.size,0.3)*8;
-//                  return d.size*0.9;
-                })
-                .on("end", function(d) { draw(d,year) })
-//                .on("end", draw)
-                .timeInterval(100)
-                .start();
+    function get_description(d, year) {
+        data = glob_data[year]['award_data'][d.text];
+        dict = {};
+        arr = [];
+        Object.keys(data['Title']).forEach(function(k) {
+            arr.push({
+                'Amount Awarded': data['Amount Awarded'][k],
+                'Funding Org:Name': data['Funding Org:Name'][k],
+                'Identifier': data['Identifier'][k],
+                'Recipient Org:Name': data['Recipient Org:Name'][k],
+                'Title': data['Title'][k]
+            });
+        });
+        dict['sample_grants'] = arr;
+        dict['value'] = glob_data[year]['award'][d.text];
+        dict['year'] = year;
+        dict['word'] = d.text;
+        dict['size'] = data['size'];
+        return JSON.stringify(dict);
+    }
 
-            function get_description(d,year) {
-//              if(!glob_data) return '';
-              data = glob_data[year]['award_data'][d.text];
-              dict = {};
-              arr = [];
-              Object.keys(data['Title']).forEach(function(k) {
-                arr.push({'Amount Awarded': data['Amount Awarded'][k], 'Funding Org:Name': data['Funding Org:Name'][k], 'Identifier': data['Identifier'][k], 'Recipient Org:Name': data['Recipient Org:Name'][k], 'Title': data['Title'][k]});
-              });
-              dict['sample_grants'] = arr;
-              dict['value'] = glob_data[year]['award'][d.text];
-              dict['year'] = year;
-              dict['word'] = d.text;
-              dict['size'] = data['size'];
-              return JSON.stringify(dict);
-            }
+    function get_colour(d,year) {
+      dict = glob_data[year]['benefactors'][d.text];
+      arr = Object.keys(dict);
+      arr.sort(function(a,b) {
+        return dict[b] - dict[a];
+      });
+      max = dict[arr[0]];
+      sum = 0;
+      arr.forEach(function(e) {
+        sum += dict[e];
+      });
+      if(max/sum < 0.5) {
+        return '0,0,0';
+      }
+      if(arr[0] === 'The Big Lottery Fund') {
+      return '67,165,227';
+      } else if (arr[0] === 'The Wellcome Trust') {
+      return '29,105,36';
+      } else if (arr[0] === 'Sport England') {
+      return '35,54,151';
+      } else {
+      return '132,18,19';
+      }
+//      return '43,140,190';
+//      return '29,105,36';
+//      return '80,42,146';
+//      return '132,18,19';
+//      return '43,140,190';
+//      return '';
+    }
 
-            function draw(words,year)
-            {
-                d3.select(element).append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-//                    .attr("transform", "translate(" + width / 2 + ", " + height / 2 + ")")
-                    .attr("transform", "translate(460, " + height / 2 + ")")
-                    .selectAll("text")
-                    .data(words)
-                    .enter().append("text")
-                    .style("font-size", function(d)
-                    {
-                        return d.size + "px";
-                    })
-                    .style("font-family", fontFamily)
-                    .style("fill", function(d, i)
-                    {
-                        return 'rgba(0,0,0,'+d.opaqueness+')';
-                    })
-                    .attr("text-anchor", "middle")
-                    .attr("data-description", function (d) { return get_description(d,year) })
-                    .attr("onclick", "display_modal(this)")
-                    .attr("transform", function(d)
-                    {
-                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                    })
-                    .text(function(d)
-                    {
-                        return d.text;
-                    });
-                    $("#loadingdiv").css('display','none');
-                    $("#outro").css('opacity','1');
-                    $("#scroll").css('opacity','1');
-            }
-        }
+    function draw(words, year) {
+        d3.select(element).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(460, " + height / 2 + ")")
+            .selectAll("text")
+            .data(words)
+            .enter().append("text")
+            .style("font-size", function(d) {
+                return d.size + "px";
+            })
+            .style("font-family", fontFamily)
+            .style("fill", function(d, i) {
+              colour = get_colour(d,year)
+                return 'rgba('+colour+','+ d.opaqueness + ')';
+            })
+            .attr("text-anchor", "middle")
+            .attr("data-description", function(d) {
+                return get_description(d, year)
+            })
+            .attr("onclick", "display_modal(this)")
+            .attr("transform", function(d) {
+                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+            })
+            .text(function(d) {
+                return d.text;
+            });
+        $("#loadingdiv").css('display', 'none');
+        $("#outro").css('opacity', '1');
+        $("#scroll").css('opacity', '1');
+    }
+}
 
-    // using d3 for convenience
-    var container = d3.select('#scroll');
-    var graphic = container.select('.scroll__graphic');
-    var chart = graphic.select('.chart');
-    var text = container.select('.scroll__text');
-    var step = text.selectAll('.step');
+// using d3 for convenience
+var container = d3.select('#scroll');
+var graphic = container.select('.scroll__graphic');
+var chart = graphic.select('.chart');
+var text = container.select('.scroll__text');
+var step = text.selectAll('.step');
 
-		// initialize the scrollama
-		var scroller = scrollama();
-		// generic window resize listener event
-		function handleResize() {
-			// 1. update height of step elements
-//			var stepHeight = Math.floor(window.innerHeight * 0.75);
-			var stepHeight = Math.floor(window.innerHeight);
-			step.style('height', stepHeight + 'px');
-			// 2. update width/height of graphic element
-			var bodyWidth = d3.select('body').node().offsetWidth;
-			graphic
-				.style('width', bodyWidth + 'px')
-				.style('height', window.innerHeight + 'px');
-			var chartMargin = 32;
-			var textWidth = text.node().offsetWidth;
-			var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
-			chart
-				.style('width', chartWidth + 'px')
-				.style('height', Math.floor(window.innerHeight / 1.2) + 'px');
-			// 3. tell scrollama to update new element dimensions
-			scroller.resize();
-		}
-		// scrollama event handlers
-		function handleStepEnter(response) {
-			// response = { element, direction, index }
-			// add color to current step only
-			step.classed('is-active', function (d, i) {
-				return i === response.index;
-			})
-      var year = parseInt($(response.element).attr('data-year'));
-      $('#word-cloud-'+year).addClass('wordcloud-visible')
-      if(year > 2005) { $('#word-cloud-'+(year-1)).removeClass('wordcloud-visible'); }
-      if(year < 2017) { $('#word-cloud-'+(year+1)).removeClass('wordcloud-visible'); }
-			// update graphic based on step
-//			chart.select('p').text(response.index + 1)
-		}
-		function handleContainerEnter(response) {
-			// response = { direction }
-			// sticky the graphic (old school)
-			graphic.classed('is-fixed', true);
-			graphic.classed('is-bottom', false);
-		}
-		function handleContainerExit(response) {
-			// response = { direction }
-			// un-sticky the graphic, and pin to top/bottom of container
-			graphic.classed('is-fixed', false);
-			graphic.classed('is-bottom', response.direction === 'down');
-		}
-		function init() {
-      scroll(0,0);
-			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-			handleResize();
-			// 2. setup the scroller passing options
-			// this will also initialize trigger observations
-			// 3. bind scrollama event handlers (this can be chained like below)
-			scroller.setup({
-				container: '#scroll',
-				graphic: '.scroll__graphic',
-				text: '.scroll__text',
-				step: '.scroll__text .step',
-        offset: 0.90
-			})
-				.onStepEnter(handleStepEnter)
-				.onContainerEnter(handleContainerEnter)
-				.onContainerExit(handleContainerExit);
-			// setup resize event
-			window.addEventListener('resize', handleResize);
-		}
-		// kick things off
-		init();
+// initialize the scrollama
+var scroller = scrollama();
+// generic window resize listener event
+function handleResize() {
+    // 1. update height of step elements
+    //			var stepHeight = Math.floor(window.innerHeight * 0.75);
+    var stepHeight = Math.floor(window.innerHeight);
+    step.style('height', stepHeight + 'px');
+    // 2. update width/height of graphic element
+    var bodyWidth = d3.select('body').node().offsetWidth;
+    graphic
+        .style('width', bodyWidth + 'px')
+        .style('height', window.innerHeight + 'px');
+    var chartMargin = 32;
+    var textWidth = text.node().offsetWidth;
+    var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
+    chart
+        .style('width', chartWidth + 'px')
+        .style('height', Math.floor(window.innerHeight / 1.2) + 'px');
+    // 3. tell scrollama to update new element dimensions
+    scroller.resize();
+}
+// scrollama event handlers
+function handleStepEnter(response) {
+    // response = { element, direction, index }
+    // add color to current step only
+    step.classed('is-active', function(d, i) {
+        return i === response.index;
+    })
+    var year = parseInt($(response.element).attr('data-year'));
+    $('#word-cloud-' + year).addClass('wordcloud-visible')
+    if (year > 2005) {
+        $('#word-cloud-' + (year - 1)).removeClass('wordcloud-visible');
+    }
+    if (year < 2017) {
+        $('#word-cloud-' + (year + 1)).removeClass('wordcloud-visible');
+    }
+    // update graphic based on step
+    //			chart.select('p').text(response.index + 1)
+}
 
-window.onbeforeunload = function () {
-  window.scrollTo(0, 0);
+function handleContainerEnter(response) {
+    // response = { direction }
+    // sticky the graphic (old school)
+    graphic.classed('is-fixed', true);
+    graphic.classed('is-bottom', false);
+}
+
+function handleContainerExit(response) {
+    // response = { direction }
+    // un-sticky the graphic, and pin to top/bottom of container
+    graphic.classed('is-fixed', false);
+    graphic.classed('is-bottom', response.direction === 'down');
+}
+
+function init() {
+    scroll(0, 0);
+    // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+    handleResize();
+    // 2. setup the scroller passing options
+    // this will also initialize trigger observations
+    // 3. bind scrollama event handlers (this can be chained like below)
+    scroller.setup({
+            container: '#scroll',
+            graphic: '.scroll__graphic',
+            text: '.scroll__text',
+            step: '.scroll__text .step',
+            offset: 0.90
+        })
+        .onStepEnter(handleStepEnter)
+        .onContainerEnter(handleContainerEnter)
+        .onContainerExit(handleContainerExit);
+    // setup resize event
+    window.addEventListener('resize', handleResize);
+}
+// kick things off
+init();
+
+window.onbeforeunload = function() {
+    window.scrollTo(0, 0);
 }
 
     </script>

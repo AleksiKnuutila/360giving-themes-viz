@@ -36,8 +36,8 @@
 		}
 		#intro {
 			max-width: 40rem;
-			margin: 1rem auto;
-			text-align: center;
+      margin-top: 1.5rem;
+			margin-left: 100px;
 		}
 		.intro__overline {
 			font-size: 1.4rem;
@@ -50,20 +50,24 @@
 			letter-spacing: 0.05em;
 		}
 		.intro__dek {
-			font-size: 1.4rem;
+          font-family: proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 48px;
+
+     text-align: left;
+    margin-left: 56px;
 		}
 		/* demo */
 		#intro {
-			margin-bottom: 320px;
+			margin-bottom: 40px;
 		}
 		#outro {
-			height: 640px;
+			height: 200px;
 		}
 		/* scrollama */
 		#scroll {
 			position: relative;
-/*			border-top: 1px dashed #000; */
-			border-bottom: 1px dashed #000;
+/*			border-top: 1px dashed #000;
+			border-bottom: 1px dashed #000;*/
 		}
 		.scroll__graphic {
 			position: absolute;
@@ -98,13 +102,16 @@
 			text-align: center;
 			padding: 1rem;
 			position: absolute;
-			top: 78%;
-			left: 14%;
+			top: 75%;
+			left: 27.5%;
 			-moz-transform: translate(-50%, -50%);
 			-webkit-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%);
 			font-size: 1rem;
 			color: #666;
+    width: 550px;
+    line-height: 1.75rem;
+    text-align: left;
 		}
 		.scroll__text {
 			position: relative;
@@ -279,6 +286,17 @@
   40% { opacity: 1; }
 }
 
+.introp {
+      text-align: left;
+    margin-top: 30px;
+
+     margin-left: 59px;
+    font-family: proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    width: 550px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
 	</style>
 
 
@@ -298,12 +316,29 @@
     <script src="vendor/remodal.min.js"></script>
 
 	<section id='intro'>
-		<p class='intro__overline'>
-			<a href='https://github.com/russellgoldenberg/scrollama'>scrollama.js</a>
-		</p>
-		<h1 class='intro__hed'>Demo: Sticky Graphic</h1>
+
 		<p class='intro__dek'>
-			Start scrolling to see how it works.
+    Distinctive themes in grant funding in 2005-2017
+		</p>
+
+		<p class="introp">
+    This visualisation answers the question "Who has funded what themes throughout the years?"
+    </p>
+
+		<p class="introp">
+    Visualisations often rely on <b>pre-defined categories</b>. Instead, this visualisation analyses the language funders use to describe their grants with machine learning.
+    </p>
+
+		<p class="introp">
+    This visualisation displays <b>distinctive phrases</b> for every year. Distinctive phrases are the ones that are frequent in a particular year but not frequent across the entire dataset.
+		</p>
+
+		<p class="introp">
+    Distinctive phrases are displayed in stronger colours. The larger a word is the more money was available for associated grants.
+		</p>
+
+		<p class="introp">
+    Scroll downwards the find different years, and click on words for more information. Use a browser on your desktop or laptop.
 		</p>
 
     <div id="loadingdiv">
@@ -332,43 +367,43 @@
 		<!--   actual graphic/chart   -->
 		<div class='chart' style="height: 80%; border-left: 3px solid; color: #dddddd;">
       <div style="padding: 5px;" class="wordcloud wordcloud-visible" id="word-cloud-2005">
-        <p>A description of 2005 goes here</p>
+        <p>2005 was the 60th anniversary of the Second World War. Many of the most distinctive themes relate to activities of commemmoration and reunion.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2006">
-        <p>A description of 2006 goes here</p>
+        <p>Pigeon racing and folk music were surprisingly popular in 2006.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2007">
-        <p>A description of 2007 goes here</p>
+        <p>2007 was the bicentennial anniversary of the abolition of slavery.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2008">
-        <p>A description of 2008 goes here</p>
+        <p>Natural themes featured frequently in 2008, and many were getting ready for the anniversary of Darwin's 200th birthday.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2009">
-        <p>A description of 2009 goes here</p>
+        <p>Mention science funding.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2010">
-        <p>A description of 2010 goes here</p>
+        <p>Heroes Return</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2011">
-        <p>A description of 2011 goes here</p>
+        <p>Preparation for olympics.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2012">
-        <p>A description of 2012 goes here</p>
+        <p>Diamond jubilee.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2013">
-        <p>A description of 2013 goes here</p>
+        <p>Resilience</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2014">
-        <p>A description of 2014 goes here</p>
+        <p>Ebola</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2015">
-        <p>A description of 2015 goes here</p>
+        <p>Mindfulness and happiness</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2016">
-        <p>A description of 2016 goes here</p>
+        <p>Refugee crisis</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2017">
-        <p>A description of 2017 goes here</p>
+        <p></p>
       </div>
 		</div>
 	</div>
@@ -378,7 +413,7 @@
 
     <div style="height: 250px;"></div>
 		<div class='step' data-step='1' data-year="2005">
-			<p>2005 &#9679;</p>
+			<p>2005</p>
 		</div>
 		<div class='step' data-step='2' data-year="2006">
 			<p>2006</p>
@@ -421,6 +456,13 @@
 </section>
 
 <section id='outro' style="opacity: 0;">
+  <p class="introp">
+  A visualisation by <a href="http://twitter.com/knuutila">Aleksi Knuutila</a>. For the source code and more information about the visualisation, please visit <a href="https://aleksiknuutila.github.io/360giving-themes-viz/">GitHub</a>.
+  </p>
+
+  <p class="introp">
+  Many thanks for 360Giving and the data publishers for their hard work in making the information available.
+  </p>
 
 </section>
 
@@ -531,8 +573,9 @@ function spiralfuncc(size) {
 }
 
 var glob_data;
-var stopwords = ['spouse','60th','65th','pole','cent','remember','remembering','buffet','tape','out-of-school','borrow','bind','awarding','differentiate','19th','one-year','ticket','accelerate','delienate','fourteen','transferrable','differentiate','80th','piles','rack','delineate','skip','procurement','enforcement','wasting','ping','malta','normandy','interdisciplinary','holland','allocation','cord','handover','rethink','govern','follow-on','convening','sheriff','furthest','thank','confirmation','lots','90th','cymru','mitigate'];
+var stopwords = ['spouse','60th','65th','pole','cent','remember','remembering','buffet','tape','out-of-school','borrow','bind','awarding','differentiate','19th','one-year','ticket','accelerate','delienate','fourteen','transferrable','differentiate','80th','piles','rack','delineate','skip','procurement','enforcement','wasting','ping','malta','normandy','interdisciplinary','holland','allocation','cord','handover','rethink','govern','follow-on','convening','sheriff','furthest','thank','confirmation','lots','90th','cymru','mitigate','overarch','yachting','interrogate','globally','extracurricular','obstinately','resilience','desperately','earliest','unrestricted','resilient'];
 
+//$.getJSON('alljson.json', function(data) {
 $.getJSON('http://localhost:3000/alljson.json', function(data) {
 //    e = '2017';
 //    drawWordCloud(50,data[e],e);
@@ -661,7 +704,7 @@ $.getJSON('http://localhost:3000/alljson.json', function(data) {
                     {
                         return d.text;
                     });
-                    $("#loadingdiv").fadeOut(400);
+                    $("#loadingdiv").css('display','none');
                     $("#outro").css('opacity','1');
                     $("#scroll").css('opacity','1');
             }
@@ -749,15 +792,13 @@ window.onbeforeunload = function () {
   window.scrollTo(0, 0);
 }
 
-
-
     </script>
   <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
   </div>
 
 <script id="template" type="x-tmpl-mustache">
 <p>In {{ year }}, there were {{ quantity }} grants which were described with the word "{{ word }}". The amount of money given in these grants was {{ value }} pounds.</p>
-<p>Here is a sample of some of the grants with links to more information.</p>
+<p>Here is a sample of some of the grants with links to more information:</p>
 <ul>
 {{{ list }}}
 <ul>

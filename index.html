@@ -50,7 +50,7 @@
 			letter-spacing: 0.05em;
 		}
 		.intro__dek {
-          font-family: proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 48px;
 
      text-align: left;
@@ -99,6 +99,7 @@
         */
 		}
 		.chart p {
+          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 			text-align: center;
 			padding: 1rem;
 			position: absolute;
@@ -152,7 +153,8 @@
 
 text:hover {
   text-decoration: underline;
-    cursor: pointer;
+  cursor: pointer;
+  fill: rgba(var(--rgb), 1) !important;
 }
 
 
@@ -332,7 +334,7 @@ text:hover {
     </p>
 
 		<p class="introp">
-    Visualisations often rely on <b>pre-defined categories</b>. Instead, this visualisation analyses the language funders use to describe their grants with machine learning.
+    Visualisations often rely on <b>pre-defined categories</b>. Instead, this visualisation uses machine learning to find themes in the language funders use to describe their grants.
     </p>
 
 		<p class="introp">
@@ -340,11 +342,11 @@ text:hover {
 		</p>
 
 		<p class="introp">
-    The most distinctive phrases are displayed in stronger colours. The larger a word is the more money was available for associated grants.
+    The most distinctive phrases are displayed with darker text. The larger a word is the more money was available for grants associated with the theme. The funders that are most prevalent in the data, the Wellcome Trust and Big Lottery Fund, are distinguished by colour.
 		</p>
 
 		<p class="introp">
-    Scroll downwards the find different years, and click on words for more information. Use a browser on your desktop or laptop.
+    Scroll downwards to find different years, and click on words for more information. Use a browser on your desktop or laptop.
 		</p>
 
     <div id="loadingdiv">
@@ -373,28 +375,28 @@ text:hover {
 		<!--   actual graphic/chart   -->
 		<div class='chart' style="height: 80%; border-left: 3px solid; color: #dddddd;">
       <div style="padding: 5px;" class="wordcloud wordcloud-visible" id="word-cloud-2005">
-        <p>2005 was the 60th anniversary of the Second World War's ending, with activities focused on commemmoration and reunion.</p>
+        <p>2005 was the 60th anniversary of the Second World War's ending, with activities focused on commemmoration and reunion. Practically all grants are from the Big Lottery Fund, indicaed with blue colour.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2006">
-        <p>Pigeon racing and folk music were surprisingly popular in 2006.</p>
+        <p>Pigeon racing and folk music were surprisingly popular in 2006. Some themes were mainly associated with the Wellcome Trust - these are in green.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2007">
-        <p>2007 was the bicentennial anniversary of the abolition of slavery.</p>
+        <p>Given the bicentennial anniversary of the abolition of slavery, related themes were distinctive for 2017. However, themes such as wetlands, received more funds - that is why the word is displayed larger.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2008">
-        <p>Natural themes featured frequently in 2008, and many were getting ready for the anniversary of Darwin's 200th birthday.</p>
+        <p>Themes related to nature and wildlife featured frequently in 2008, and many groups were getting ready for the anniversary of Darwin's 200th birthday.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2009">
-        <p>Scientific themes stand out in 2009. Wellcome Trust, a prominent science funder, is distinguished by colour.</p>
+        <p>The flu pandemic was reflected in research priorities in 2008 and 2009. Wellcome Trust, a prominent science funder, is distinguished by green colour.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2010">
-        <p>With another anniversary of WW2, locations related to the war stand out.</p>
+        <p>With another anniversary of the Second World War, related locations stand out. While blue represents themes related to the Big Lottery Fund and green the Wellcome Trust, black is reserved for themes related to all other funders.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2011">
         <p>Preparations for the London olympics begin already in 2011.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2012">
-        <p>2012 was the year of the Diamond Jubilee and when the Department for Transport published a lot of data.</p>
+        <p>2012 was the year of the Diamond Jubilee. Data about grants from the Department for Transport begins from 2012, which makes related topics stand out.</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2013">
         <p>In 2013, the Big Lottery Fund ran its Recession Response Fund.</p>
@@ -409,7 +411,7 @@ text:hover {
         <p>The refugee crisis in 2016 stands out through the keyword "syrian".</p>
       </div>
       <div style="padding: 5px;" class="wordcloud" id="word-cloud-2017">
-        <p>Loneliness and community assets were big themes in 2017.</p>
+        <p>Loneliness and community assets were big themes in 2017. The data for 2017 also includes a wider variety of funders.</p>
       </div>
 		</div>
 	</div>
@@ -579,9 +581,9 @@ function spiralfuncc(size) {
 
 var glob_data;
 // remove numbers and words that are very general
-var stopwords = ['spouse', '60th', '65th', 'pole', 'cent', 'remember', 'remembering', 'buffet', 'tape', 'out-of-school', 'borrow', 'bind', 'awarding', 'differentiate', '19th', 'one-year', 'ticket', 'accelerate', 'delienate', 'fourteen', 'transferrable', 'differentiate', '80th', 'piles', 'rack', 'delineate', 'skip', 'procurement', 'enforcement', 'wasting', 'ping', 'malta', 'normandy', 'interdisciplinary', 'holland', 'allocation', 'cord', 'handover', 'rethink', 'govern', 'follow-on', 'convening', 'sheriff', 'furthest', 'thank', 'confirmation', 'lots', '90th', 'cymru', 'mitigate', 'overarch', 'yachting', 'interrogate', 'globally', 'extracurricular', 'obstinately', 'resilience', 'desperately', 'earliest', 'unrestricted', 'resilient','hopefully','unprecedented','crumb','closing','pile','hoot','merit','intercalate','40th'];
+var stopwords = ['spouse', '60th', '65th', 'pole', 'cent', 'remember', 'remembering', 'buffet', 'tape', 'out-of-school', 'borrow', 'bind', 'awarding', 'differentiate', '19th', 'one-year', 'ticket', 'accelerate', 'delienate', 'fourteen', 'transferrable', 'differentiate', '80th', 'piles', 'rack', 'delineate', 'skip', 'procurement', 'enforcement', 'wasting', 'ping', 'malta', 'normandy', 'interdisciplinary', 'holland', 'allocation', 'cord', 'handover', 'rethink', 'govern', 'follow-on', 'convening', 'sheriff', 'furthest', 'thank', 'confirmation', 'lots', '90th', 'cymru', 'mitigate', 'overarch', 'yachting', 'interrogate', 'globally', 'extracurricular', 'obstinately', 'resilience', 'desperately', 'earliest', 'unrestricted', 'resilient','hopefully','unprecedented','crumb','closing','pile','hoot','merit','intercalate','40th','investigator','lloyd','mutilation','prediction','wage','http'];
 
-//$.getJSON('http://localhost:3000/allj2.json', function(data) {
+//$.getJSON('http://localhost:3000/data.json', function(data) {
 $.getJSON('data.json', function(data) {
     glob_data = data;
     Object.keys(data).forEach(function(e) {
@@ -599,6 +601,7 @@ function get_opaqueness(weight, sortedlist, weights) {
 var easeOutQuad = function(t) {
     return 1 - (--t) * t * t * t
 }
+var easeOutCubic = function (t) { return 1-(--t)*t*t*t }
 var easeInQuad = function(t) {
     return t
 }
@@ -635,7 +638,9 @@ function drawWordCloud(cloud_size, data, year) {
             return {
                 text: d,
                 size: 7 + awards[d] / top_award_vals * 1000,
-                opaqueness: easeOutInQuad(get_opaqueness(allwords[d], allw, allwords))
+//                opaqueness: easeOutInQuad(get_opaqueness(allwords[d], allw, allwords))
+                opaqueness: easeOutCubic(get_opaqueness(allwords[d], allw, allwords))
+//                opaqueness: get_opaqueness(allwords[d], allw, allwords)
             };
         }))
         .padding(8)
@@ -691,11 +696,13 @@ function drawWordCloud(cloud_size, data, year) {
       if(arr[0] === 'The Big Lottery Fund') {
       return '67,165,227';
       } else if (arr[0] === 'The Wellcome Trust') {
-      return '29,105,36';
+//      return '29,105,36';
+      return '230,85,13';
       } else if (arr[0] === 'Sport England') {
-      return '35,54,151';
+      return '0,0,0';
       } else {
-      return '132,18,19';
+//      return '132,18,19';
+      return '0,0,0';
       }
 //      return '43,140,190';
 //      return '29,105,36';
@@ -721,6 +728,9 @@ function drawWordCloud(cloud_size, data, year) {
             .style("fill", function(d, i) {
               colour = get_colour(d,year)
                 return 'rgba('+colour+','+ d.opaqueness + ')';
+            })
+            .style("--rgb",function(d, i) {
+              return get_colour(d,year)
             })
             .attr("text-anchor", "middle")
             .attr("data-description", function(d) {

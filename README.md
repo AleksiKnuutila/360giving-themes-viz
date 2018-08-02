@@ -1,6 +1,6 @@
 # 360giving-themes-viz
 
-An entry to the 360 Giving Data Visualisation challenge.
+An entry to the 360 Giving Data Visualisation challenge. View it [https://aleksiknuutila.github.io/360giving-themes-viz/](here).
 
 This visualisation answers the question "Who has funded what themes throughout the years?"
 
